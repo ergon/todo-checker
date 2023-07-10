@@ -46,14 +46,14 @@ An exclusion file looks as follows.
 An inclusion file could look like this.
 
 ```text
-**/*.java
-**/*.jsp
-**/*.js
-**/*.kt
-**/*.kts
-**/*.ts
-**/*.gradle
-**/*.properties
-**/*.xml
-**/*.go
+**.java
+**.jsp
+**.js
+**.kt
+**.kts
+**.ts
+**.gradle
+**.properties
+**.xml
+**.go
 ```
