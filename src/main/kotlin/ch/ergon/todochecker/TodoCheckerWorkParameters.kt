@@ -1,0 +1,24 @@
+/*
+ * Copyright (c) Ergon Informatik AG, Switzerland
+ */
+
+package ch.ergon.todochecker
+
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
+import org.gradle.workers.WorkParameters
+import java.net.URI
+
+internal interface TodoCheckerWorkParameters : WorkParameters {
+	val outputFile: RegularFileProperty
+	val directory: DirectoryProperty
+	val exclusions: RegularFileProperty
+	val inclusions: RegularFileProperty
+	val jiraUrl: Property<URI>
+	val jiraUsername: Property<String>
+	val jiraPassword: Property<String>
+	val jiraProject: Property<String>
+	val jiraResolvedStatuses: ListProperty<String>
+}
