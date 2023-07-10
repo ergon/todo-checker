@@ -1,6 +1,10 @@
 Todo Checker
 ============
 
+The Todo Checker plugin will look for the pattern `(?i)(TODO|FIXME)\\s+($jiraProject-\\d+)` (e.g. "TODO ALSAAS-123: some
+comment") in text files. If any of the referenced Jira issues are resolved, it will report the file with the issue owner
+or reporter. There should be no TODO markers in the source code for resolved issues.
+
 Apply the Todo Checker plugin to a project.
 
 ```kotlin
