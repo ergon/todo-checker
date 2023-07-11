@@ -53,8 +53,17 @@ $output
 	}
 
 	private fun readExclusions(exclusions: RegularFileProperty): List<String> =
-		exclusions.map { f -> f.asFile.useLines { it.toList() } }.getOrElse(emptyList())
+		exclusions.map { f ->
+			f.asFile.useLines { it.toListWithoutComments() }
+		}.getOrElse(emptyList())
 
 	private fun readInclusions(inclusions: RegularFileProperty): List<String> =
-		inclusions.map { f -> f.asFile.useLines { it.toList() } }.getOrElse(emptyList())
+		inclusions.map { f ->
+			f.asFile.useLines { it.toListWithoutComments() }
+		}.getOrElse(emptyList())
+
+	private fun Sequence<String>.toListWithoutComments(): List<String> = map(String::trim)
+		.filter(String::isNotBlank)
+		.filter { !it.startsWith("#") }
+		.toList()
 }
