@@ -45,7 +45,7 @@ dependencyLocking {
 }
 
 kotlin {
-	jvmToolchain(17)
+	jvmToolchain(11)
 }
 
 tasks.withType<KotlinJvmCompile> {
