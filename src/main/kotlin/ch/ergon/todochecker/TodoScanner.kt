@@ -20,14 +20,16 @@ internal fun todoScannerFor(
 	exclusions: List<String>,
 	inclusions: List<String>,
 	jiraProject: String,
+	todoRegex: String?,
 ): TodoScanner =
-	TodoScanner(directory, exclusions, inclusions, jiraProject)
+	TodoScanner(directory, exclusions, inclusions, jiraProject, todoRegex)
 
 internal class TodoScanner internal constructor(
 	private val directory: Path,
 	exclusions: List<String>,
 	inclusions: List<String>,
 	private val jiraProject: String,
+	private val todoRegex: String?,
 ) {
 	private val logger = Logging.getLogger(TodoScanner::class.java)
 	private val exclusions: String
@@ -123,12 +125,12 @@ internal class TodoScanner internal constructor(
 	 * followed by at least one whitespace character and <issue key>.
 	 */
 	private fun getTodoForLine(line: String): List<JiraIssueKey> {
-		val pattern = Pattern.compile("(?i)(TODO|FIXME)\\s+($jiraProject-\\d+)")
+		val pattern = Pattern.compile(todoRegex ?: "(?i)(TODO|FIXME)\\s+(?<ticket>$jiraProject-\\d+)")
 		val matcher = pattern.matcher(line)
 		val todo: MutableList<JiraIssueKey> = ArrayList()
 
 		while (matcher.find()) {
-			todo.add(JiraIssueKey(matcher.group(2)))
+			todo.add(JiraIssueKey(matcher.group("ticket")))
 		}
 
 		return todo

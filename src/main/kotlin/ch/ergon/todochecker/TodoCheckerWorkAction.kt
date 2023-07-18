@@ -19,7 +19,13 @@ abstract class TodoCheckerWorkAction : WorkAction<TodoCheckerWorkParameters> {
 		val inclusions = readInclusions(parameters.inclusions)
 		logger.info("Scanning \"$directory\" for Todo")
 
-		val todo = todoScannerFor(directory, exclusions, inclusions, parameters.jiraProject.get()).scan()
+		val todo = todoScannerFor(
+			directory = directory,
+			exclusions = exclusions,
+			inclusions = inclusions,
+			jiraProject = parameters.jiraProject.get(),
+			todoRegex = parameters.todoRegex.getOrNull(),
+		).scan()
 		val jiraRepository = JiraRepository(
 			parameters.jiraUrl.get(),
 			parameters.jiraCredentials.get(),

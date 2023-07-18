@@ -43,6 +43,7 @@ abstract class TodoCheckerTask @Inject constructor(
 			it.jiraCredentials.set(getCredentials(extension))
 			it.jiraProject.set(extension.jiraProject)
 			it.jiraResolvedStatuses.set(extension.jiraResolvedStatuses)
+			it.todoRegex.set(extension.todoRegex)
 		}
 	}
 
