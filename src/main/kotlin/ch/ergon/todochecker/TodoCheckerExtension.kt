@@ -32,6 +32,7 @@ interface TodoCheckerExtension {
 	val jiraUrl: Property<URI>
 	val jiraUsername: Property<String>
 	val jiraPassword: Property<String>
+	val jiraPersonalAccessToken: Property<String>
 
 	/**
 	 * The Jira project key.

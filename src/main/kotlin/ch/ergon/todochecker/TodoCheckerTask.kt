@@ -40,10 +40,18 @@ abstract class TodoCheckerTask @Inject constructor(
 			it.exclusions.set(extension.exclusions)
 			it.inclusions.set(extension.inclusions)
 			it.jiraUrl.set(extension.jiraUrl)
-			it.jiraUsername.set(extension.jiraUsername)
-			it.jiraPassword.set(extension.jiraPassword)
+			it.jiraCredentials.set(getCredentials(extension))
 			it.jiraProject.set(extension.jiraProject)
 			it.jiraResolvedStatuses.set(extension.jiraResolvedStatuses)
+		}
+	}
+
+	private fun getCredentials(extension: TodoCheckerExtension): JiraCredentials {
+		val token = extension.jiraPersonalAccessToken.getOrNull()
+		return if (token != null) {
+			JiraCredentials.PersonalAccessToken(token)
+		} else {
+			JiraCredentials.UsernamePassword(extension.jiraUsername.get(), extension.jiraPassword.get())
 		}
 	}
 }

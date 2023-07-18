@@ -22,8 +22,7 @@ abstract class TodoCheckerWorkAction : WorkAction<TodoCheckerWorkParameters> {
 		val todo = todoScannerFor(directory, exclusions, inclusions, parameters.jiraProject.get()).scan()
 		val jiraRepository = JiraRepository(
 			parameters.jiraUrl.get(),
-			parameters.jiraUsername.get(),
-			parameters.jiraPassword.get(),
+			parameters.jiraCredentials.get(),
 			parameters.jiraResolvedStatuses.getOrElse(emptyList()),
 		)
 

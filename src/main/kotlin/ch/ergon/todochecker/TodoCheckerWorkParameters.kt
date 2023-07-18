@@ -17,8 +17,7 @@ internal interface TodoCheckerWorkParameters : WorkParameters {
 	val exclusions: RegularFileProperty
 	val inclusions: RegularFileProperty
 	val jiraUrl: Property<URI>
-	val jiraUsername: Property<String>
-	val jiraPassword: Property<String>
+	val jiraCredentials: Property<JiraCredentials>
 	val jiraProject: Property<String>
 	val jiraResolvedStatuses: ListProperty<String>
 }
