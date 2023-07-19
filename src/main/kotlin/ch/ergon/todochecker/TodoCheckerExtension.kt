@@ -45,8 +45,12 @@ interface TodoCheckerExtension {
 	val jiraResolvedStatuses: ListProperty<String>
 
 	/**
-	 * The regex used for searching TODOs and recognizing associated JIRA tickets.
+	 * The regex used for searching TODOs and recognizing associated JIRA issue.
 	 * Must contain a named capture group "ticket" which is used to extract the matched JIRA ticket.
 	 */
 	val todoRegex: Property<String>
+	/**
+	 * Whether the gradle build fails on found TODOs with resolved JIRA issue.
+	 */
+	val failOnResolvedTodos: Property<Boolean>
 }

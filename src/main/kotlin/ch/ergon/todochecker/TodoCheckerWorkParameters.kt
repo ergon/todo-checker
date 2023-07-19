@@ -21,4 +21,5 @@ internal interface TodoCheckerWorkParameters : WorkParameters {
 	val jiraProject: Property<String>
 	val jiraResolvedStatuses: ListProperty<String>
 	val todoRegex: Property<String>
+	val failOnResolvedTodos: Property<Boolean>
 }

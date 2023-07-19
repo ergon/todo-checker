@@ -4,6 +4,7 @@
 
 package ch.ergon.todochecker
 
+import org.gradle.api.GradleException
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.logging.Logging
 import org.gradle.workers.WorkAction
@@ -24,7 +25,7 @@ abstract class TodoCheckerWorkAction : WorkAction<TodoCheckerWorkParameters> {
 			exclusions = exclusions,
 			inclusions = inclusions,
 			jiraProject = parameters.jiraProject.get(),
-			todoRegex = parameters.todoRegex.getOrNull(),
+			todoRegex = parameters.todoRegex.getOrNull()
 		).scan()
 		val jiraRepository = JiraRepository(
 			parameters.jiraUrl.get(),
@@ -51,6 +52,10 @@ $output
 				logger.info("Todo written to file $file")
 			} catch (e: IOException) {
 				logger.error("Error writing to file $file", e)
+			}
+
+			if (parameters.failOnResolvedTodos.getOrElse(false)) {
+				throw GradleException("Todos with resolved issues found")
 			}
 		} else {
 			logger.lifecycle("No Todo for resolved issues found")

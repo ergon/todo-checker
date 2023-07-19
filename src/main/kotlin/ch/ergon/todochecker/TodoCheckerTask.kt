@@ -45,6 +45,7 @@ abstract class TodoCheckerTask @Inject constructor(
 			it.jiraProject.set(extension.jiraProject)
 			it.jiraResolvedStatuses.set(extension.jiraResolvedStatuses)
 			it.todoRegex.set(extension.todoRegex)
+			it.failOnResolvedTodos.set(extension.failOnResolvedTodos)
 		}
 	}
 
