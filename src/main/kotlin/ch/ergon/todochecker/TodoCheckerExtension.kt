@@ -49,6 +49,7 @@ interface TodoCheckerExtension {
 	 * Must contain a named capture group "ticket" which is used to extract the matched JIRA ticket.
 	 */
 	val todoRegex: Property<String>
+
 	/**
 	 * Whether the gradle build fails on found TODOs with resolved JIRA issue.
 	 */

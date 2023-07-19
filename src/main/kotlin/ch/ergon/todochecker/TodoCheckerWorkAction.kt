@@ -25,7 +25,7 @@ abstract class TodoCheckerWorkAction : WorkAction<TodoCheckerWorkParameters> {
 			exclusions = exclusions,
 			inclusions = inclusions,
 			jiraProject = parameters.jiraProject.get(),
-			todoRegex = parameters.todoRegex.getOrNull()
+			todoRegex = parameters.todoRegex.getOrNull(),
 		).scan()
 		val jiraRepository = JiraRepository(
 			parameters.jiraUrl.get(),
