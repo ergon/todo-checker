@@ -31,6 +31,20 @@ pipeline {
 	}
 
 	stages {
+		stage('Prepare') {
+			steps {
+				script {
+					buildVersion = sh(
+						script: './print-version.sh',
+						returnStdout: true
+					).trim()
+					currentBuild.description = "${buildVersion}"
+					writeFile file: 'build-version.txt', text: buildVersion
+					archiveArtifacts 'build-version.txt'
+				}
+			}
+		}
+
 		stage('Build') {
 			steps {
 				sh jdk("./build.sh")
