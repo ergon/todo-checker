@@ -5,6 +5,7 @@
 package ch.ergon.todochecker
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.tasks.InputFiles
@@ -40,19 +41,23 @@ abstract class TodoCheckerTask @Inject constructor(
 			it.exclusions.set(extension.exclusions)
 			it.inclusions.set(extension.inclusions)
 			it.jiraUrl.set(extension.jiraUrl)
-			it.jiraCredentials.set(getCredentials(extension))
+			it.jiraCredentials.set(getCredentials(project, extension))
 			it.jiraProject.set(extension.jiraProject)
 			it.jiraResolvedStatuses.set(extension.jiraResolvedStatuses)
 			it.todoRegex.set(extension.todoRegex)
 		}
 	}
 
-	private fun getCredentials(extension: TodoCheckerExtension): JiraCredentials {
-		val token = extension.jiraPersonalAccessToken.getOrNull()
+	private fun getCredentials(project: Project, extension: TodoCheckerExtension): JiraCredentials {
+		val token = project.findProperty("jiraPersonalAccessToken") as String?
+			?: extension.jiraPersonalAccessToken.getOrNull()
 		return if (token != null) {
 			JiraCredentials.PersonalAccessToken(token)
 		} else {
-			JiraCredentials.UsernamePassword(extension.jiraUsername.get(), extension.jiraPassword.get())
+			JiraCredentials.UsernamePassword(
+				username = project.findProperty("jiraUsername") as String? ?: extension.jiraUsername.get(),
+				password = project.findProperty("jiraPassword") as String? ?: extension.jiraPassword.get(),
+			)
 		}
 	}
 }
