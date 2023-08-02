@@ -7,8 +7,7 @@ set -o pipefail
 dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 cd "${dir}"
 
-echo "Building ${dir}"
-
 version=$(./print-version.sh)
+echo "Building ${version}"
 
-./gradlew clean build "-PbuildVersion=${version}"
+./gradlew clean build "-Pversion=${version}"

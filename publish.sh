@@ -8,5 +8,6 @@ dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 cd "${dir}"
 
 version=$(./print-version.sh)
+echo "Publishing ${version}"
 
-./gradlew publish "-PbuildVersion=${version}"
+./gradlew publish "-Pversion=${version}"

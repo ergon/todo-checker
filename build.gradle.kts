@@ -12,7 +12,6 @@ val repositoryArtifactoryUsername: String by project
 val repositoryArtifactoryApiKey: String by project
 
 group = "ch.ergon.todochecker"
-version = project.findProperty("buildVersion") ?: "0.0.1-local"
 
 gradlePlugin {
 	plugins {
