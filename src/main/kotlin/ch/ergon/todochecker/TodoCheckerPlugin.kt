@@ -35,7 +35,7 @@ private fun Project.createConfiguration(): Configuration =
 		it.isCanBeConsumed = false
 		it.isCanBeResolved = true
 		it.defaultDependencies { dependencies ->
-			dependencies.add(project.dependencies.create("com.atlassian.jira:jira-rest-java-client-core:5.2.5"))
+			dependencies.add(project.dependencies.create("com.atlassian.jira:jira-rest-java-client-core:5.2.6"))
 			dependencies.add(project.dependencies.create("io.atlassian.fugue:fugue:4.7.2"))
 		}
 	}
