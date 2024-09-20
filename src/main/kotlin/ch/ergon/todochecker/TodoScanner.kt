@@ -28,13 +28,8 @@ internal class TodoScanner internal constructor(
 	private val todoRegex: String?,
 ) {
 	private val logger = Logging.getLogger(TodoScanner::class.java)
-	private val exclusions: String
-	private val inclusions: String
-
-	init {
-		this.exclusions = "glob:{" + exclusions.joinToString(separator = ",") + "}"
-		this.inclusions = "glob:{" + inclusions.joinToString(separator = ",") + "}"
-	}
+	private val exclusions: String = "glob:{" + exclusions.joinToString(separator = ",") + "}"
+	private val inclusions: String = "glob:{" + inclusions.joinToString(separator = ",") + "}"
 
 	/**
 	 * Walks over all files in the directory and returns a mapping between Jira issues and files.
