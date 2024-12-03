@@ -49,7 +49,7 @@ internal class TodoScanner internal constructor(
 					Collectors.groupingBy(
 						{ (key) -> key },
 						Collectors.mapping(
-							{ (_, value) -> value },
+							{ (_, path) -> directory.relativize(path) },
 							Collectors.toSet(),
 						),
 					),
