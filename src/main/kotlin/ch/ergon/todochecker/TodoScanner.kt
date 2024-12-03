@@ -41,8 +41,7 @@ internal class TodoScanner internal constructor(
 	 */
 	fun scan(): Map<JiraIssueKey, Set<Path>> =
 		Files.walk(directory).use { stream ->
-			stream.map { path -> directory.relativize(path) }
-				.filter { path -> Files.isRegularFile(path) }
+			stream.filter { path -> Files.isRegularFile(path) }
 				.filter(::notExcluded)
 				.filter(isIncluded().or(hasTextContent()))
 				.flatMap { path -> getTodoForFile(path).entries.stream() }
