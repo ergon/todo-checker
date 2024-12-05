@@ -41,9 +41,10 @@ internal class TodoScanner internal constructor(
 	 */
 	fun scan(): Map<JiraIssueKey, Set<Path>> =
 		Files.walk(directory).use { stream ->
-			stream.filter { path -> Files.isRegularFile(path) }
-				.filter(::notExcluded)
-				.filter(isIncluded().or(hasTextContent()))
+			stream
+				.filter { path -> Files.isRegularFile(path) }
+				.filter { path -> notExcluded(path, directory) }
+				.filter(isIncluded(directory).or(hasTextContent()))
 				.flatMap { path -> getTodoForFile(path).entries.stream() }
 				.collect(
 					Collectors.groupingBy(
@@ -56,21 +57,23 @@ internal class TodoScanner internal constructor(
 				)
 		}
 
-	private fun notExcluded(file: Path): Boolean {
+	private fun notExcluded(file: Path, directory: Path): Boolean {
+		val relativizedPath = directory.relativize(file)
 		val excluded = FileSystems.getDefault()
 			.getPathMatcher(exclusions)
-			.matches(file)
+			.matches(relativizedPath)
 		if (excluded) {
-			logger.info("Skipping file \"$file\": Excluded")
+			logger.info("Skipping file \"$relativizedPath\": Excluded")
 		}
 		return !excluded
 	}
 
-	private fun isIncluded(): Predicate<Path> =
+	private fun isIncluded(directory: Path): Predicate<Path> =
 		Predicate { path ->
+			val relativizedPath = directory.relativize(path)
 			FileSystems.getDefault()
 				.getPathMatcher(inclusions)
-				.matches(path)
+				.matches(relativizedPath)
 		}
 
 	private fun hasTextContent(): Predicate<Path> =
