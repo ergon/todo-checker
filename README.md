@@ -7,6 +7,20 @@ issue owner or reporter. There should be no TODO markers in the source code for 
 
 ## Configure Todo Checker in Gradle
 
+Update `settings.gradle.kts` to include Atlassian dependency:
+
+```kotlin
+dependencyResolutionManagement {
+	repositories {
+		maven {
+			url = uri("https://packages.atlassian.com/mvn/maven-external/")
+		}
+	}
+}
+```
+
+Configure Todo Checker in `build.gradle.kts`:
+
 ```kotlin
 todoChecker {
     jiraUrl.set(URI.create("https://jira.mycompany.com"))
