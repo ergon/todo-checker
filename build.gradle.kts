@@ -9,16 +9,6 @@ plugins {
 }
 
 group = "ch.ergon.todochecker"
-version = "0.0.1"
-
-publishing {
-	repositories {
-		maven {
-			name = "local"
-			url = uri(layout.buildDirectory.dir("local-repo"))
-		}
-	}
-}
 
 gradlePlugin {
 	website = "https://github.com/ergon/todo-checker"
