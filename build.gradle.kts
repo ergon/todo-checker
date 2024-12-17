@@ -5,7 +5,7 @@ plugins {
 	alias(libs.plugins.detekt)
 	alias(libs.plugins.kotlin.jvm)
 	alias(libs.plugins.spotless)
-	id ("com.gradle.plugin-publish") version "1.3.0"
+	alias(libs.plugins.plugin.publish)
 }
 
 group = "ch.ergon.todochecker"

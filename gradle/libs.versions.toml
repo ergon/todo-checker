@@ -3,6 +3,7 @@ detekt = "1.23.0"
 jira-rest-java-client = "5.2.6"
 kotlin = "1.8.22"
 spotless = "6.19.0"
+publish = "1.3.0"
 
 [libraries]
 jira-rest-java-client = { module = "com.atlassian.jira:jira-rest-java-client-core", version.ref = "jira-rest-java-client" }
@@ -11,3 +12,4 @@ jira-rest-java-client = { module = "com.atlassian.jira:jira-rest-java-client-cor
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "publish" }
